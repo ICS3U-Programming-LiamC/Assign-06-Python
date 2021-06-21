@@ -4,6 +4,8 @@
 # Created on: June 14, 2021
 # This program STUFF STUFF
 
+import Y_vowel_words
+
 capitalizer = False
 capitalizer_test = False
 
@@ -35,7 +37,7 @@ def punctuator(word, puncter):
     return word
 
 
-def swapper(word):
+def swapper(word, y):
     letter = word[0]
     while True:
         if (letter == 'a'):
@@ -47,6 +49,8 @@ def swapper(word):
         elif (letter == 'o'):
             break
         elif (letter == 'u'):
+            break
+        elif (letter == y):
             break
         else:
             word = word[1:] + word[0]
@@ -64,6 +68,18 @@ def latin_converter(user_list):
 
     # does the rest
     for each in user_list:
+        y_vow = "a"
+        temp = each
+        temp = temp.replace(".", "")
+        temp = temp.replace(",", "")
+        temp = temp.replace("?", "")
+        temp = temp.replace("!", "")
+        temp = temp.replace(":", "")
+        temp = temp.replace(";", "")
+        for odd_word in Y_vowel_words.y_vowel_words:
+            if temp == odd_word:
+                y_vow = "y"
+
         global capitalizer
         global capitalizer_test
         each = each.strip()
@@ -82,8 +98,10 @@ def latin_converter(user_list):
             suffix = "way"
         elif(letter == "u"):
             suffix = "way"
+        elif(letter == y_vow):
+            suffix = "way"
         else:
-            swapped = swapper(swapped)
+            swapped = swapper(swapped, y_vow)
             suffix = "ay"
 
         # adds ay to the end of the words
